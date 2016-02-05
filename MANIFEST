@@ -1,0 +1,8 @@
+MANIFEST
+MANIFEST.SKIP
+Makefile.PL
+README
+SuperText.pm
+test.pl
+META.yml                                 Module YAML meta-data (added by MakeMaker)
+META.json                                Module JSON meta-data (added by MakeMaker)
