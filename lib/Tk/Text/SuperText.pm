@@ -1,83 +1,9 @@
-##
-#
-# $Author: alex $
-# $Revision: 1.34 $
-# $Log: SuperText.pm,v $
-# Revision 1.35  2016/02/01 22:06:42  alex
-# applied patch from RT #24700 by Darren Meyer
-#
-# Revision 1.34  2001/01/17 17:35:51  alex
-# TextANSIColor.pm cool support and bug fixes by Jim Turner
-#
-# Revision 1.33  1999/07/11 09:43:51  alex
-# Fixed "\" matching char bug
-#
-# Revision 1.32  1999/07/11 09:40:01  alex
-# Fixed Win32 BackSpace bug thanks to Jim Turner
-#
-# Revision 1.31  1999/03/07 23:04:13  alex
-# Fixed Tk 800 core dump
-#
-# Revision 1.30  1999/02/19 17:12:06  alex
-# Unfixed Tk 800,mouse selection doesn't work
-#
-# Revision 1.29  1999/02/19 16:06:48  alex
-# Fixed use Tk 800
-#
-# Revision 1.28  1999/02/19 13:14:07  alex
-# Fixed backward matching char search
-#
-# Revision 1.27  1999/02/18 23:48:59  alex
-# catched cut/copy/paste methods
-#
-# Revision 1.26  1999/02/18 20:55:08  alex
-# Speedup for matching and shifting
-#
-# Revision 1.25  1999/02/18 20:53:26  alex
-# Speedup for matching and shifting
-#
-# Revision 1.24  1999/02/13 20:32:40  alex
-# FIXME: block operations are slow!!!!
-#
-# Revision 1.10  1999/02/11 18:22:02  alex
-# Removed Stupid typo error
-#
-# Revision 1.9  1999/02/11 10:52:44  alex
-# Changed DefaultEvent to return e reference to a hash
-#
-# Revision 1.8  1999/02/10 16:59:25  alex
-# *** Empty log message ***
-#
-# Revision 1.7  1999/02/09 23:20:27  alex
-# Selection Scroll bux fixed
-#
-# Revision 1.6  1999/02/09 22:22:52  alex
-# added public methods,jumpToMatchingChar,fixed '-foreground' bug
-#
-# Revision 1.5  1999/02/09 16:28:53  alex
-# made virtual events associated methods public,removed some block und
-#
-# Revision 1.4  1999/02/05 13:54:29  alex
-# catch some errors on undo/redo pop
-#
-# Revision 1.3  1999/02/05 13:32:44  alex
-# Fixed undo/redo blocks
-#
-# Revision 1.2  1999/02/04 11:25:46  alex
-# First stable version
-#
-# Revision 1.1  1999/01/24 11:09:31  alex
-# Initial revision
-#
-##
-
 package Tk::Text::SuperText;
 
-use AutoLoader;
 use Exporter ();
 use Tk qw(800 Ev);
-require Tk::Text;
-require Tk::Derived;
+use Tk::Text;
+use Tk::Derived;
 
 
 #+20010117 JWT TextANSIColor support
@@ -107,7 +33,7 @@ use vars qw($VERSION @ISA @EXPORT);
 	leftTab copy cut paste inlinePaste undo redo destroy keyPress menuSelect noOP
 );
 
-$VERSION = '0.9.5';
+$VERSION = '0.10';
 @ISA = qw(Tk::Derived Tk::Text Exporter);
 
 use base qw(Tk::Text);
@@ -245,14 +171,14 @@ sub DefaultEvents {
 	);
 	
 	return \%events;	
-}
+} # /DefaultEvents
 
 sub ClassInit
 {
 	my ($class,$w) = @_;
 	
 	$class->SUPER::ClassInit($w);
-
+	
 	# reset default Tk::Text binds
 	$class->RemoveTextBinds($w);
 	
@@ -646,10 +572,6 @@ sub getansi
 	return $res;
 }
 #+
-
-1;
-
-#__END__
 
 # clipboard methods that must be overriden for rectangular selections
 
@@ -1829,19 +1751,19 @@ sub insertControlCode
 	$w->{ASCIICODE} = 1;
 }
 
-sub focusNext
-{
-	my $w = shift;
-
-	$w->focusNext;
-}
-
-sub focusPrev
-{
-	my $w = shift;
-
-	$w->focusPrev;
-}
+#sub focusNext
+#{
+#	my $w = shift;
+#
+#	$w->focusNext;
+#}
+#
+#sub focusPrev
+#{
+#	my $w = shift;
+#
+#	$w->focusPrev;
+#}
 
 # find a matching char for the given one
 sub _FindMatchingChar
