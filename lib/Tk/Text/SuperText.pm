@@ -1964,7 +1964,7 @@ __END__
 
 =head1 NAME
 
-Tk::Text::SuperText - An improved text widget for perl/tk
+Tk::Text::SuperText - An improved text widget for Perl/Tk
 
 =head1 SYNOPSIS
 
@@ -2101,7 +2101,7 @@ I<$w>-E<gt>B<resetUndo>;
 
 =item * Rectangular selections.
 
-Rectangular text zones can be selected,copied,deleted,shifted with the mouse
+Rectangular text zones can be selected, copied, deleted, shifted with the mouse
 or with the keyboard.
 
 =item * Selection right/left char and tab shift.
@@ -2161,16 +2161,17 @@ I<line y> line 2
 
 =item * Parentheses matching.
 
-To help you inspect nested parentheses,brackets and other characters,B<SuperText>
-has both an automatic parenthesis matching mode,and a find matching command.
+To help you inspect nested parentheses, brackets and other characters, B<SuperText>
+has both an automatic parenthesis matching mode, and a find matching command.
 Automatic parenthesis matching is activated when you type or when you move the
-insertion cursor after a parenthesis.It momentarily highlightsthe matching character
-if that character is visible in the window.To find a matching character anywhere in the
-file,position the cursor after the it,and call the find matching command.
+insertion cursor after a parenthesis.
+It momentarily highlightsthe matching character if that character is visible in the window.
+To find a matching character anywhere in the file, position the cursor after the it,
+and call the find matching command.
 
 =item * Autoindenting.
 
-When you press the Return or Enter key,spaces and tabs are inserted to line up the
+When you press the Return or Enter key, spaces and tabs are inserted to line up the
 insert point under the start of the previous line.
 
 =item * Control codes insertion.
@@ -2181,8 +2182,8 @@ You can directly insert a non printable control character in the text.
 
 Every B<SuperText> command is binded to a virtual event,so to call it or to bind it
 to a key sequence use the L<Tk::event> functions.
-I used this format for key bind so there's no direct key-to-command bind,and this
-give me more flexibility;however you can use normal binds.
+I used this format for key bind so there's no direct key-to-command bind, and this
+give me more flexibility; however you can use normal binds.
 
 Example: I<$w>-E<gt>B<eventAdd>(I<'Tk::Text::SuperText','E<lt>E<lt>SelectAllE<gt>E<gt>','E<lt>Control-aE<gt>'>);
 
