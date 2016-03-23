@@ -33,7 +33,7 @@ use vars qw($VERSION @ISA @EXPORT);
 	leftTab copy cut paste inlinePaste undo redo destroy keyPress menuSelect noOP
 );
 
-$VERSION = '0.10';
+$VERSION = '0.11';
 @ISA = qw(Tk::Derived Tk::Text Exporter);
 
 use base qw(Tk::Text);
@@ -2479,6 +2479,11 @@ I<$widget>-E<gt>B<menuSelect>
 Current maintainer is Alexander Becker, L<c a p f a n -at- g m x %dot% d e>.
 
 Originally written by Alessandro Iob.
+
+=head1 LICENSE
+
+This program is free software; you can redistribute it and/or modify it under 
+the same terms as Perl itself.
 
 =head1 SEE ALSO
 

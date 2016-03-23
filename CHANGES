@@ -5,6 +5,9 @@ Release history is not exact for the pre 0.9.5 release
 0.11 2016-02-11
 
   - found complete changes history im README and moved it to CHANGES file
+  - added tests to manifest
+  - minor POD tweaks
+  - added license info to module POD
 
 0.10 2016-02-05
 
