@@ -13,6 +13,7 @@ eval 'use Term::ANSIColor; 1' or $ansicolor = -1;
 
 use Carp;
 use strict;
+use warnings;
 use vars qw($VERSION @ISA @EXPORT);
 
 @EXPORT = qw(
