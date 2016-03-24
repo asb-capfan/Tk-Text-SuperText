@@ -33,7 +33,7 @@ use vars qw($VERSION @ISA @EXPORT);
 	leftTab copy cut paste inlinePaste undo redo destroy keyPress menuSelect noOP
 );
 
-$VERSION = '0.11';
+$VERSION = '0.12';
 @ISA = qw(Tk::Derived Tk::Text Exporter);
 
 use base qw(Tk::Text);
@@ -2476,7 +2476,7 @@ I<$widget>-E<gt>B<menuSelect>
 
 =head1 AUTHOR
 
-Current maintainer is Alexander Becker, L<c a p f a n -at- g m x %dot% d e>.
+Current maintainer is Alexander Becker, L<asb@cpan.org>.
 
 Originally written by Alessandro Iob.
 
