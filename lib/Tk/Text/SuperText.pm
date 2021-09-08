@@ -1969,7 +1969,7 @@ Tk::Text::SuperText - An improved text widget for Perl/Tk
 
 =head1 SYNOPSIS
 
-I<$super_text> = I<$paren>-E<gt>B<SuperText>(?I<options>?);
+    $super_text = $paren->SuperText(?options?);
 
 =head1 STANDARD OPTIONS
 
@@ -2080,8 +2080,8 @@ Sets the default insert mode: B<insert> or B<overwrite> .
 
 =item Switch:	B<-ansicolor>
 
-Enables or disables use of L<Tk::TextANSIColor> module (by Tim Jenness <t.jenness@jach.hawaii.edu>).
-This option was implemented by Jim Turner <turnerjw2@netscape.net> (THANKS for the support!)
+Enables or disables use of L<Tk::TextANSIColor> module.
+This option was implemented by Jim Turner (THANKS for the support!)
 
 =back
 
@@ -2196,110 +2196,110 @@ I<$w>-E<gt>B<bindDefault>;
 Every virtual event has an associated public method with the same name of the event but with the first
 char in lower case (e.g.: B<E<lt>E<lt>MouseSelectE<gt>E<gt>> event has a corresponding  I<$super_text>-E<gt>B<mouseSelect> method).
 
-    Virtual Event/Command		Default Key Binding
+    Virtual Event/Command     Default Key Binding
     
-    B<MouseSetInsert>			B<E<lt>Button1E<gt>>
-    B<MouseSelect>			B<E<lt>B1-MotionE<gt>>
-    B<MouseSelectWord>		B<E<lt>Double-1E<gt>>
-    B<MouseSelectLine>		B<E<lt>Triple-1E<gt>>
-    B<MouseSelectAdd>			B<E<lt>Shift-1E<gt>>
-    B<MouseSelectAddWord>		B<E<lt>Double-Shift-1E<gt>>
-    B<MouseSelectAddLine>		B<E<lt>Triple-Shift-1E<gt>>
-    B<MouseSelectAutoScan>		B<E<lt>B1-LeaveE<gt>>
-    B<MouseSelectAutoScanStop>	B<E<lt>B1-EnterE<gt>>,B<E<lt>ButtonRelease-1E<gt>>
-    B<MouseMoveInsert>		B<E<lt>Alt-1E<gt>>
-    B<MouseRectSelection>		B<E<lt>Control-B1-MotionE<gt>>
-    B<MouseMovePageTo>		B<E<lt>2E<gt>>
-    B<MouseMovePage>			B<E<lt>B2-MotionE<gt>>
-    B<MousePasteSelection>		B<E<lt>ButtonRelease-2E<gt>>
+    MouseSetInsert            <Button1>
+    MouseSelect               <B1-Motion>
+    MouseSelectWord           <Double-1>
+    MouseSelectLine           <Triple-1>
+    MouseSelectAdd            <Shift-1>
+    MouseSelectAddWord        <Double-Shift-1>
+    MouseSelectAddLine        <Triple-Shift-1>
+    MouseSelectAutoScan       <B1-Leave>
+    MouseSelectAutoScanStop   <B1-Enter>,<ButtonRelease-1>
+    MouseMoveInsert           <Alt-1>
+    MouseRectSelection        <Control-B1-Motion>
+    MouseMovePageTo           <2>
+    MouseMovePage             <B2-Motion>
+    MousePasteSelection       <ButtonRelease-2>
     
-    B<MoveLeft>				B<E<lt>LeftE<gt>>
-    B<SelectLeft>			B<E<lt>Shift-LeftE<gt>>
-    B<SelectRectLeft>			B<E<lt>Shift-Alt-LeftE<gt>>
-    B<MoveLeftWord>			B<E<lt>Control-LeftE<gt>>
-    B<SelectLeftWord>			B<E<lt>Shift-Control-LeftE<gt>>
-    B<MoveRight>				B<E<lt>RightE<gt>>
-    B<SelectRight>			B<E<lt>Shift-RightE<gt>>
-    B<SelectRectRight>		B<E<lt>Shift-Alt-RightE<gt>>
-    B<MoveRightWord>			B<E<lt>Control-RightE<gt>>
-    B<SelectRightWord>		B<E<lt>Shift-Control-RightE<gt>>
-    B<MoveUp>				B<E<lt>UpE<gt>>
-    B<SelectUp>				B<E<lt>Shift-UpE<gt>>
-    B<SelectRectUp>			B<E<lt>Shift-Alt-UpE<gt>>
-    B<MoveUpParagraph>		B<E<lt>Control-UpE<gt>>
-    B<SelectUpParagraph>		B<E<lt>Shift-Control-UpE<gt>>
-    B<MoveDown>				B<E<lt>DownE<gt>>
-    B<SelectDown>			B<E<lt>Shift-DownE<gt>>
-    B<SelectRectDown>			B<E<lt>Shift-Alt-DownE<gt>>
-    B<MoveDownParagraph>		B<E<lt>Control-DownE<gt>>
-    B<SelectDownParagraph>		B<E<lt>Shift-Control-DownE<gt>>
-    B<MoveLineStart>			B<E<lt>HomeE<gt>>
-    B<SelectToLineStart>		B<E<lt>Shift-HomeE<gt>>
-    B<MoveTextStart>			B<E<lt>Control-HomeE<gt>>
-    B<SelectToTextStart>		B<E<lt>Shift-Control-HomeE<gt>>
-    B<MoveLineEnd>			B<E<lt>EndE<gt>>
-    B<SelectToLineEnd>		B<E<lt>Shift-EndE<gt>>
-    B<MoveTextEnd>			B<E<lt>Control-EndE<gt>>
-    B<SelectToTextEnd>		B<E<lt>Shift-Control-EndE<gt>>
-    B<MovePageUp>			B<E<lt>PriorE<gt>>
-    B<SelectToPageUp>			B<E<lt>Shift-PriorE<gt>>
-    B<MovePageLeft>			B<E<lt>Control-PriorE<gt>>
-    B<MovePageDown>			B<E<lt>NextE<gt>>
-    B<SelectToPageDown>		B<E<lt>Shift-NextE<gt>>
-    B<MovePageRight>			B<E<lt>Control-NextE<gt>>
-    B<SetSelectionMark>		B<E<lt>Control-spaceE<gt>>,B<E<lt>SelectE<gt>>
-    B<SelectToMark>			B<E<lt>Shift-Control-spaceE<gt>>,B<E<lt>Shift-SelectE<gt>>
+    MoveLeft                  <Left>
+    SelectLeft                <Shift-Left>
+    SelectRectLeft            <Shift-Alt-Left>
+    MoveLeftWord              <Control-Left>
+    SelectLeftWord            <Shift-Control-Left>
+    MoveRight                 <Right>
+    SelectRight               <Shift-Right>
+    SelectRectRight           <Shift-Alt-Right>
+    MoveRightWord             <Control-Right>
+    SelectRightWord           <Shift-Control-Right>
+    MoveUp                    <Up>
+    SelectUp                  <Shift-Up>
+    SelectRectUp              <Shift-Alt-Up>
+    MoveUpParagraph           <Control-Up>
+    SelectUpParagraph         <Shift-Control-Up>
+    MoveDown                  <Down>
+    SelectDown                <Shift-Down>
+    SelectRectDown            <Shift-Alt-Down>
+    MoveDownParagraph         <Control-Down>
+    SelectDownParagraph       <Shift-Control-Down>
+    MoveLineStart             <Home>
+    SelectToLineStart         <Shift-Home>
+    MoveTextStart             <Control-Home>
+    SelectToTextStart         <Shift-Control-Home>
+    MoveLineEnd               <End>
+    SelectToLineEnd           <Shift-End>
+    MoveTextEnd               <Control-End>
+    SelectToTextEnd           <Shift-Control-End>
+    MovePageUp                <Prior>
+    SelectToPageUp            <Shift-Prior>
+    MovePageLeft              <Control-Prior>
+    MovePageDown              <Next>
+    SelectToPageDown          <Shift-Next>
+    MovePageRight             <Control-Next>
+    SetSelectionMark          <Control-space>,<Select>
+    SelectToMark              <Shift-Control-space>,<Shift-Select>
     
-    B<SelectAll>				B<E<lt>Control-aE<gt>>
-    B<SelectionShiftLeft>		B<E<lt>Control-commaE<gt>>
-    B<SelectionShiftLeftTab>	B<E<lt>Control-Alt-commaE<gt>>
-    B<SelectionShiftRight>		B<E<lt>Control-periodE<gt>>
-    B<SelectionShiftRightTab>	B<E<lt>Control-Alt-periodE<gt>>
+    SelectAll                 <Control-a>
+    SelectionShiftLeft        <Control-comma>
+    SelectionShiftLeftTab     <Control-Alt-comma>
+    SelectionShiftRight       <Control-period>
+    SelectionShiftRightTab    <Control-Alt-period>
     
-    B<Ins>					B<E<lt>InsertE<gt>>
-    B<Enter>				B<E<lt>ReturnE<gt>>
-    B<AutoIndentEnter>		B<E<lt>Control-ReturnE<gt>>
-    B<NoAutoindentEnter>		B<E<lt>Shift-ReturnE<gt>>
-    B<Del>					B<E<lt>DeleteE<gt>>
-    B<BackSpace>				B<E<lt>BackSpaceE<gt>>
-    B<DeleteToWordStart>		B<E<lt>Shift-BackSpaceE<gt>>
-    B<DeleteToWordEnd>		B<E<lt>Shift-DeleteE<gt>>
-    B<DeleteToLineStart>		B<E<lt>Alt-BackSpaceE<gt>>
-    B<DeleteToLineEnd>		B<E<lt>Alt-DeleteE<gt>>
-    B<DeleteWord>			B<E<lt>Control-BackSpaceE<gt>>
-    B<DeleteLine>			B<E<lt>Control-DeleteE<gt>>
+    Ins                       <Insert>
+    Enter                     <Return>
+    AutoIndentEnter           <Control-Return>
+    NoAutoindentEnter         <Shift-Return>
+    Del                       <Delete>
+    BackSpace                 <BackSpace>
+    DeleteToWordStart         <Shift-BackSpace>
+    DeleteToWordEnd           <Shift-Delete>
+    DeleteToLineStart         <Alt-BackSpace>
+    DeleteToLineEnd           <Alt-Delete>
+    DeleteWord                <Control-BackSpace>
+    DeleteLine                <Control-Delete>
     
-    B<InsertControlCode>		B<E<lt>Control-EscapeE<gt>>
+    InsertControlCode         <Control-Escape>
     
-    B<FocusNext>				B<E<lt>Control-TabE<gt>>
-    B<FocusPrev>				B<E<lt>Shift-Control-TabE<gt>>
+    FocusNext                 <Control-Tab>
+    FocusPrev                 <Shift-Control-Tab>
     
-    B<FlashMatchingChar>		B<E<lt>Control-bE<gt>>
-    B<RemoveMatch>			B<E<lt>Control-BE<gt>>
-    B<FindMatchingChar>		B<E<lt>Control-jE<gt>>
-    B<JumpToMatchingChar>		B<E<lt>Control-JE<gt>>
+    FlashMatchingChar         <Control-b>
+    RemoveMatch               <Control-B>
+    FindMatchingChar          <Control-j>
+    JumpToMatchingChar        <Control-J>
     
-    B<Escape>				B<E<lt>EscapeE<gt>>
+    Escape                    <Escape>
     
-    B<Tab> 					B<E<lt>TabE<gt>>
+    Tab                       <Tab>
     
-    B<LeftTab> 				B<E<lt>Shift-TabE<gt>>
+    LeftTab                   <Shift-Tab>
     
-    B<Copy> 				B<E<lt>Control-cE<gt>>
+    Copy                      <Control-c>
     
-    B<Cut> 					B<E<lt>Control-xE<gt>>
+    Cut                       <Control-x>
     
-    B<Paste> 				B<E<lt>Control-vE<gt>>
+    Paste                     <Control-v>
     
-    B<InlinePaste> 			B<E<lt>Control-VE<gt>>
+    InlinePaste               <Control-V>
     
-    B<Undo> 				B<E<lt>Control-zE<gt>>
+    Undo                      <Control-z>
     
-    B<Redo>					B<E<lt>Control-ZE<gt>>
+    Redo                      <Control-Z>
     
-    B<Destroy>				B<E<lt>DestroyE<gt>>
+    Destroy                   <Destroy>
     
-    B<MenuSelect>			B<E<lt>Alt-KeyPressE<gt>>
+    MenuSelect                <Alt-KeyPress>
 
 =item * Public methods.
 
