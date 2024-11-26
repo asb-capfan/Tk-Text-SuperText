@@ -1,5 +1,9 @@
 Revision history for Perl module Tk::Text::SuperText
 
+0.13 tbd
+
+  - improved code in Button1 method (thanks to Jim Turner)
+
 0.12 2016-02-24
 
   - further improved POD
@@ -7,7 +11,7 @@ Revision history for Perl module Tk::Text::SuperText
 
 0.11 2016-02-11
 
-  - found complete changes history im README and moved it to CHANGES file
+  - found complete changes history in README and moved it to CHANGES file
   - added tests to manifest
   - minor POD tweaks
   - added license info to module POD
