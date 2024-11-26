@@ -670,12 +670,12 @@ sub SetCursor
 sub Button1
 {
 	my $w = shift;
-	my $str;
-	
+    
 	$w->SUPER::Button1(@_);
 	
 	if((!defined $w->tag('ranges','sel')) && $w->cget('-showmatching') == 1) {
-		if(exists $w->{MATCHINGCOUPLES}->{$str=$w->get('insert','insert + 1c')}) {
+        my $str = $w->get('insert', 'insert + 1c');
+		if(defined $str && exists $w->{MATCHINGCOUPLES}->{$str}) {
 			# calculate visible zone and search only in this one
 			my ($l,$c) = split('\.',$w->index('end'));
 			my ($slimit,$elimit) = $w->yview;
