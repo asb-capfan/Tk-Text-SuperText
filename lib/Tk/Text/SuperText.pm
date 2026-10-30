@@ -199,6 +199,7 @@ sub Populate
 
 	# and set configuration parameters defaults
 	$w->ConfigSpecs(
+		'-readonly'           => ['METHOD','readOnly','ReadOnly',0],
 		'-indentmode'		=> ['PASSIVE','indentMode','IndentMode','auto'],
 #+20010117 JWT TextANSIColor support
 		'-ansicolor'		=> ['PASSIVE','ansicolor','ansicolor',undef],
@@ -276,6 +277,39 @@ sub insertmode
 	
 	if(!defined $val) {return $w->{INSERTMODE};}
 	$w->{INSERTMODE}=$val;
+}
+
+# Read-only affects editing commands, not application insert/delete calls.
+sub readonly
+{
+	my ($w,$val) = @_;
+	return $w->{READONLY} || 0 unless @_ > 1;
+	$w->{READONLY} = $val ? 1 : 0;
+	delete $w->{ASCIICODE} if $w->{READONLY};
+	return $w->{READONLY};
+}
+
+# Tk::Text uses Insert for interactive insertion (including replacement of sel).
+sub Insert
+{
+	my $w = shift;
+	return if $w->cget('-readonly');
+	return $w->SUPER::Insert(@_);
+}
+
+# Also protect the inherited edit menu and search/replace dialog.
+sub ReplaceSelectionsWith
+{
+	my $w = shift;
+	return if $w->cget('-readonly');
+	return $w->SUPER::ReplaceSelectionsWith(@_);
+}
+
+sub clipboardCut
+{
+	my $w = shift;
+	return if $w->cget('-readonly');
+	return $w->SUPER::clipboardCut(@_);
 }
 
 # insertion and deletion functions intereptors
@@ -579,6 +613,7 @@ sub getansi
 sub deleteSelected
 {
 	my $w = shift;
+	return if $w->cget('-readonly');
 	
 	if(!defined $Tk::selectionType || ($Tk::selectionType eq 'normal')) {
 		$w->SUPER::deleteSelected;
@@ -769,6 +804,7 @@ sub resetUndo
 sub undo
 {
 	my ($w) = @_;
+	return 0 if $w->cget('-readonly');
 	my $s;
 	my $op;
 	my @args;
@@ -821,6 +857,7 @@ sub undo
 sub redo
 {
 	my ($w) = @_;
+	return 0 if $w->cget('-readonly');
 	my $block = 0;
 	
 	if(exists $w->{REDO}) {
@@ -1116,6 +1153,7 @@ sub mouseMovePage
 sub mousePasteSelection
 {
 	my $w = shift;
+	return if $w->cget('-readonly');
 	my $ev = $w->XEvent;
 
 	if(!$Tk::mouseMoved) {
@@ -1550,6 +1588,7 @@ sub selectionShiftRightTab
 sub _SelectionShift
 {
 	my ($w,$type,$dir) = @_;
+	return if $w->cget('-readonly');
 	
 	if((!defined $type) || (!defined $dir)) {return;}
 	if(!defined $w->tag('ranges','sel')) {return;}
@@ -1591,6 +1630,7 @@ sub _SelectionShift
 sub ins
 {
 	my $w = shift;
+	return if $w->cget('-readonly');
 
 	$w->{LINESTART}=0;
 	if($w->{INSERTMODE} eq 'insert') {$w->{INSERTMODE}='overwrite';}
@@ -1600,6 +1640,7 @@ sub ins
 sub enter
 {
 	my $w = shift;
+	return if $w->cget('-readonly');
 
 	$w->_BeginUndoBlock;
 	Tk::catch {$w->Insert("\n")};
@@ -1612,6 +1653,7 @@ sub enter
 sub autoIndentEnter
 {
 	my $w = shift;
+	return if $w->cget('-readonly');
 
 	$w->_BeginUndoBlock;
 	Tk::catch {$w->Insert("\n")};
@@ -1622,6 +1664,7 @@ sub autoIndentEnter
 sub noAutoIndentEnter
 {
 	my $w = shift;
+	return if $w->cget('-readonly');
 
 	Tk::catch {$w->Insert("\n")};
 }
@@ -1629,6 +1672,7 @@ sub noAutoIndentEnter
 sub _AutoIndent
 {
 	my $w = shift;
+	return if $w->cget('-readonly');
 	my ($line,$col) = split('\.',$w->index('insert'));
 
 	# no autoindent for first line
@@ -1653,6 +1697,7 @@ sub del
 sub Delete
 {
 	my $w = shift;
+	return if $w->cget('-readonly');
 	my $sel = Tk::catch {$w->tag('nextrange','sel','1.0','end');};
 	
 	if(defined $sel) {
@@ -1674,6 +1719,7 @@ sub backSpace
 sub Backspace
 {
 	my $w = shift;
+	return if $w->cget('-readonly');
 	my $sel = Tk::catch {$w->tag('nextrange','sel','1.0','end');};
 	
 	if(defined $sel) {
@@ -1687,6 +1733,7 @@ sub Backspace
 sub deleteToWordStart
 {
 	my $w = shift;
+	return if $w->cget('-readonly');
 	
 	if($w->compare('insert','==','insert wordstart')) {
 		$w->delete('insert - 1c');
@@ -1698,6 +1745,7 @@ sub deleteToWordStart
 sub deleteToWordEnd
 {
 	my $w = shift;
+	return if $w->cget('-readonly');
 	
 	if($w->compare('insert','==','insert wordend')) {
 		$w->delete('insert');
@@ -1709,6 +1757,7 @@ sub deleteToWordEnd
 sub deleteToLineStart
 {
 	my $w = shift;
+	return if $w->cget('-readonly');
 
 	if($w->compare('insert','==','1.0')) {return;}
 	if($w->compare('insert','==','insert linestart')) {
@@ -1721,6 +1770,7 @@ sub deleteToLineStart
 sub deleteToLineEnd
 {
 	my $w = shift;
+	return if $w->cget('-readonly');
 	
 	if($w->compare('insert','==','insert lineend')) {
 		$w->delete('insert');
@@ -1732,6 +1782,7 @@ sub deleteToLineEnd
 sub deleteWord
 {
 	my $w = shift;
+	return if $w->cget('-readonly');
 
 	$w->delete('insert wordstart','insert wordend');
 }
@@ -1739,6 +1790,7 @@ sub deleteWord
 sub deleteLine
 {
 	my $w = shift;
+	return if $w->cget('-readonly');
 
 	$w->delete('insert linestart','insert lineend + 1c');
 	$w->markSet('insert','insert linestart');
@@ -1747,6 +1799,7 @@ sub deleteLine
 sub insertControlCode
 {
 	my $w = shift;
+	return if $w->cget('-readonly');
 	
 	$w->{LINESTART}=0;
 	$w->{ASCIICODE} = 1;
@@ -1863,6 +1916,7 @@ sub escape
 sub tab
 {
 	my $w = shift;
+	return if $w->cget('-readonly');
 
 	$w->Insert("\t");
 	$w->focus;
@@ -1883,6 +1937,7 @@ sub copy
 sub cut
 {
 	my $w = shift;
+	return if $w->cget('-readonly');
 
 	Tk::catch{$w->clipboardCut;};
 	$w->see('insert');
@@ -1891,6 +1946,7 @@ sub cut
 sub paste
 {
 	my $w = shift;
+	return if $w->cget('-readonly');
 
 	Tk::catch{$w->clipboardPaste;};
 	$w->see('insert');
@@ -1899,6 +1955,7 @@ sub paste
 sub inlinePaste
 {
 	my $w = shift;
+	return if $w->cget('-readonly');
 	my ($l,$c) = split('\.',$w->index('insert'));
 	my $str;
 	my $f=0;
@@ -1932,6 +1989,7 @@ sub destroy
 sub keyPress
 {
 	my $w = shift;
+	return if $w->cget('-readonly');
 	my $ev = $w->XEvent;
 
 	$w->Insert($ev->A);
@@ -1991,6 +2049,24 @@ See L<Tk::Text> for details of theis options.
 =head1 WIDGET-SPECIFIC OPTIONS
 
 =over 4
+
+=item Name: B<readOnly>
+
+=item Class: B<ReadOnly>
+
+=item Switch: B<-readonly>
+
+Defaults to B<0>. When true, prevents interactive edits, including cut, paste,
+rectangular selection shifts, and undo/redo. Navigation, selection, copying,
+and matching-pair commands remain available. The option can be changed at
+runtime with C<$w-E<gt>configure(-readonly =E<gt> 1)> or the
+C<$w-E<gt>readonly(1)> method; C<$w-E<gt>readonly> returns the current value.
+
+Application calls to C<insert> and C<delete> remain available, allowing the
+displayed content to be updated while read-only. Unlike C<-state =E<gt> 'disabled'>,
+this option only blocks editing commands. Toggling it does not clear the content,
+selection, or undo/redo history. Programmatic edits retain normal undo behavior;
+call C<resetUndo> after replacing content if its old history is no longer needed.
 
 =item Name:	B<indentMode>
 
@@ -2474,6 +2550,12 @@ I<$widget>-E<gt>B<destroy>
 I<$widget>-E<gt>B<menuSelect>
 
 =back
+
+=head2 readonly
+
+C<$widget-E<gt>readonly> returns whether interactive editing is blocked.
+C<$widget-E<gt>readonly($boolean)> sets the mode, just like configuring
+C<-readonly>, and returns the new value. Each widget has its own mode.
 
 =head1 AUTHOR
 

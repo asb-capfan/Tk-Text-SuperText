@@ -2,6 +2,7 @@ Revision history for Perl module Tk::Text::SuperText
 
 0.13 tbd
 
+  - added per-widget -readonly option, preserving programmatic updates (Refs #1)
   - improved code in Button1 method (thanks to Jim Turner)
 
 0.12 2016-02-24

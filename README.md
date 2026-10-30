@@ -39,6 +39,10 @@ make install
 
 ## Feature example
 
+Set `-readonly => 1` to prevent user edits while keeping selection, copying,
+navigation, and programmatic `insert`/`delete` calls available. Toggle it with
+`$text->configure(-readonly => 0)` or `$text->readonly(0)`.
+
 Run the interactive playground from the repository root:
 
 ```sh
@@ -47,7 +51,8 @@ perl eg/feature-sample.pl
 
 The prepared scenarios demonstrate rectangular selections, selection shifts,
 inline paste, auto-indentation, matching pairs, and undo/redo. Each scenario
-includes instructions and an editable scratch buffer. Switching scenarios or
+includes instructions and an editable scratch buffer. The Read-only checkbox
+lets you try the same commands with editing blocked. Switching scenarios or
 resetting a sample discards edits. The "Copy demo column" button replaces the
 clipboard with sample data.
 

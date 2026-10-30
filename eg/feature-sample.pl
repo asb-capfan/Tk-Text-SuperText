@@ -76,6 +76,13 @@ my $scrolled = $mw->Scrolled('SuperText',
 )->pack(-fill => 'both', -expand => 1);
 my $text = $scrolled->Subwidget('scrolled');
 my $current = 0;
+my $readonly = 0;
+$paste_tools->Checkbutton(-text => 'Read-only', -variable => \$readonly,
+    -command => sub {
+        $text->configure(-readonly => $readonly);
+        $text->focus;
+    },
+)->pack(-side => 'right');
 
 sub load_sample {
     my ($index) = @_;
@@ -139,6 +146,7 @@ for my $event ('Copy', 'Cut', 'Paste', 'InlinePaste') {
 $mw->repeat(150, sub {
     $status = 'Cursor: ' . $text->index('insert')
             . '    Mode: ' . $text->cget('-insertmode')
+            . ($text->cget('-readonly') ? '    READ-ONLY' : '    Editable')
             . '    Scenario buttons reset the buffer; nothing is saved to disk.';
 });
 load_sample(0);
