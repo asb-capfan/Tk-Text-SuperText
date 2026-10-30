@@ -37,6 +37,20 @@ make test
 make install
 ```
 
+## Feature example
+
+Run the interactive playground from the repository root:
+
+```sh
+perl eg/feature-sample.pl
+```
+
+The prepared scenarios demonstrate rectangular selections, selection shifts,
+inline paste, auto-indentation, matching pairs, and undo/redo. Each scenario
+includes instructions and an editable scratch buffer. Switching scenarios or
+resetting a sample discards edits. The "Copy demo column" button replaces the
+clipboard with sample data.
+
 ## TODO
 
 Configurable syntax highlighting (as a separate module???).

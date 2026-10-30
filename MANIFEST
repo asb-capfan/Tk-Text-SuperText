@@ -1,4 +1,5 @@
 eg/test.pl
+eg/feature-sample.pl
 lib/Tk/Text/SuperText.pm
 t/00-load-Tk-Text-Supertext.t
 t/03-pod-coverage.t
