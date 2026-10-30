@@ -1,7 +1,7 @@
 package Tk::Text::SuperText;
 
 use Exporter ();
-use Tk qw(800 Ev);
+use Tk 804.030 qw(Ev);
 use Tk::Text;
 use Tk::Derived;
 
@@ -34,7 +34,7 @@ use vars qw($VERSION @ISA @EXPORT);
 	leftTab copy cut paste inlinePaste undo redo destroy keyPress menuSelect noOP
 );
 
-$VERSION = '0.12';
+$VERSION = '0.13';
 @ISA = qw(Tk::Derived Tk::Text Exporter);
 
 use base qw(Tk::Text);
